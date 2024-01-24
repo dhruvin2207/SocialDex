@@ -23,6 +23,12 @@ model User {
   comments Comment[]
   postLikes LikePost[]
   commentLikes LikeComment[]
+  profile Profile?
+  followers Follower[]
+  groups UserToGroup[]
+
+
+
 
 
   @@map("users")
@@ -81,4 +87,54 @@ model LikeComment {
   @@map("comment_likes")
 }
 
+model Profile {
+  id Int @id @default(autoincrement())
+  username String?
+  profileImage String?
+  bio String? @db.Text
+  location String?
+  phone String?
+  occupation String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
+  userId Int @unique
+  User User @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
+}
+
+model Group {
+  id Int @id @default(autoincrement())
+  name String
+  description String @db.Text
+  members UserToGroup[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("groups")
+}
+
+model UserToGroup {
+  id Int @id @default(autoincrement())
+  userId Int
+  groupId Int
+  user User @relation(fields: [userId], references: [id])
+  group Group @relation(fields: [groupId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+
+  @@map("user_to_group")
+}
+
+
+model Follower {
+  id Int @id @default(autoincrement())
+  userId Int
+  follower User @relation(fields: [userId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("followers")
+}

@@ -61,7 +61,8 @@ const Navbar = () => {
                }
             </ul>
             <button onClick={() => setOpen(!open)} className='absolute top-0 left-0 right-0 bottom-0'>
-                <div className='absolute text-zinc-200 top-3 left-3'>
+                <div className='absolute border rounded-lg p-1
+                 bg-red-500 opacity-60 hover:opacity-80 text-zinc-200 top-3 left-3'>
                     <X size={30}/>
                 </div>
             </button>

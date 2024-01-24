@@ -9,9 +9,9 @@ app.use(express.json())
 app.use(cors({
     origin: '*'
 }))
-
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
 app.use(rootRouter)
-
 
 
 

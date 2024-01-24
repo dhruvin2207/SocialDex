@@ -3,7 +3,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast, Toaster } from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom';
+import {  useDispatch } from "react-redux";
+import { setUser } from '../state/user.slice';
 
 
 const shema = yup.object({
@@ -15,6 +17,8 @@ const Login = () => {
     const { handleSubmit, register } = useForm({
         resolver: yupResolver(shema)
     })
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
@@ -30,6 +34,7 @@ const Login = () => {
 
           const response = await request.json()
           localStorage.setItem("user", JSON.stringify(response))
+          dispatch(setUser({ user: JSON.parse(localStorage.getItem("user")) }))
           if(response.status === "bad") {
             toast.error(response.message, {
               style: {
