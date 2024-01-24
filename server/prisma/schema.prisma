@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  username String
+  email String
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  posts Post[]
+  comments Comment[]
+  postLikes LikePost[]
+  commentLikes LikeComment[]
+
+
+  @@map("users")
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  description String @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  comments Comment[]
+  likes LikePost[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String @db.Text
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  likes LikeComment[]
+
+
+  @@map("comments")
+}
+
+model LikePost {
+  id        Int       @id @default(autoincrement())
+  postId    Int
+  post      Post      @relation(fields: [postId], references: [id])
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  @@map("post_likes")
+}
+
+model LikeComment {
+  id        Int       @id @default(autoincrement())
+  commentId    Int
+  comment      Comment     @relation(fields: [commentId], references: [id])
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  @@map("comment_likes")
+}
+
+
