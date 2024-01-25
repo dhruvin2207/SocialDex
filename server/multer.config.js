@@ -9,8 +9,20 @@ const storage = multer.diskStorage({
     }
 })
 
+const postStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./public/posts")
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname)
+    }
+})
+
 const upload = multer({ storage: storage})
 
+const postUpload = multer({ storage: postStorage})
+
 module.exports = {
-    upload
+    upload,
+    postUpload
 }

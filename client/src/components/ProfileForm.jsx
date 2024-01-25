@@ -60,18 +60,18 @@ const ProfileForm = () => {
       <Toaster />
       <div className='p-12 lg:px-56 xl:px-80 2xl:px-96 md:px-32 mt-7'>
         <form className='lg:p-8 p-4 grid grid-cols-1 gap-4' onSubmit={onSubmit} encType='multipart/form-data'>
-          <h1 className='text-2xl text-center text-orange-100 py-4 font-semibold'>Create Profile</h1>
-          <input className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <h1 className='text-2xl text-center text-zinc-800 py-4 font-semibold'>Create Profile</h1>
+          <input className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             name='username' type='text' value={user.user?.username} placeholder='Username' onChange={handleInput} />
-          <input className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <input className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             name='location' type='text' placeholder='Location' onChange={handleInput} />
-          <input className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <input className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             type='file' name='profileImage' placeholder='Profile Image' onChange={e => setImage(e.target.files[0])} />
-          <input className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <input className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             name='occupation' type='text' placeholder='Occupation' onChange={handleInput} />
-          <input className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <input className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             name='phone' type='text' placeholder='Phone' onChange={handleInput} />
-          <textarea className='p-3 bg-transparent border border-zinc-500 rounded-md text-zinc-300 focus:outline-none'
+          <textarea className='p-3 bg-transparent border border-zinc-800 text-xl  rounded-md text-zinc-800 focus:outline-none'
             name='bio' type='text' placeholder='Bio' onChange={handleInput} />
           <input type='submit' className='px-6 py-2 rounded bg-violet-500 text-white font-semibold' />
         </form>

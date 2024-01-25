@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import ProfileForm from './components/ProfileForm';
 import { setUser } from './state/user.slice';
 import {  useDispatch } from "react-redux"
+import PostForm from './components/PostForm'
 
 
 function App() {
@@ -25,13 +26,14 @@ function App() {
   
 
   return (
-    <div className='bg-zinc-800 max-w-screen-2xl min-h-screen'>
+    <div className='max-w-screen-2xl min-h-screen'>
       <Navbar/>
     <Routes>
       <Route element={<ProtectedRoute/>}>
         <Route path='/' element={<Home/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/profile-form' element={<ProfileForm/>}/>
+        <Route path='/new-post' element={<PostForm/>}/>
       </Route>
       <Route path='/register' element={<Register/>}/>
       <Route path='/login' element ={<Login/>}/>

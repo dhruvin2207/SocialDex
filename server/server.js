@@ -11,6 +11,7 @@ app.use(cors({
 }))
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
+app.use('/posts', express.static('posts'));
 app.use(rootRouter)
 
 

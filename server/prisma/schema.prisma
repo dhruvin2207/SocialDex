@@ -26,6 +26,7 @@ model User {
   profile Profile?
   followers Follower[]
   groups UserToGroup[]
+  
 
 
 
@@ -38,9 +39,11 @@ model Post {
   id Int @id @default(autoincrement())
   title String
   description String @db.Text
+  postImage String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   userId Int
+  userImage String?
   user User @relation(fields: [userId], references: [id])
   comments Comment[]
   likes LikePost[]

@@ -8,15 +8,27 @@ const prismaClient = new PrismaClient({
 const createPost = async (req, res) => {
     try {
         const { title, description } = req.body;
+        console.log(req.body)
         if(!title || !description) {
             return res.status(400).json({ message: "missing fields"})
         }
+        const postImage = req.file.filename
+
+        // get the profile of person posting
+        const posterProfile = await prismaClient.profile.findFirst({
+            where: {
+                userId: req.user.id
+            }
+        })
+
 
         const post = await prismaClient.post.create({
             data: {
                 userId: req.user.id,
                 title: title,
-                description: description
+                description: description,
+                userImage: posterProfile?.profileImage,
+                postImage: `http://localhost:8000/posts/${postImage}`
             }
         })
 
@@ -32,7 +44,8 @@ const getPosts = async (req, res) => {
         const posts = await prismaClient.post.findMany({
             include: {
                 comments:true,
-                likes: true
+                likes: true.value,
+                user: true
             }
         })
 

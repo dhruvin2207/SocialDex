@@ -48,6 +48,9 @@ const loginUser = async (req, res) => {
         const user = await prismaClient.user.findFirst({
             where: {
                 email: email
+            },
+            include: {
+                profile: true
             }
         })
 
